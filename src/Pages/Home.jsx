@@ -1,13 +1,9 @@
-import React from 'react';
-import LeftAside from '../Components/HomeLayout/LeftAside';
+import React from "react";
+import { Navigate } from "react-router";
 
 const Home = () => {
-    return (
-        <div>
-            Home Page
-            
-        </div>
-    );
+  return <Navigate to="/category/1"></Navigate>;
+
 };
 
 export default Home;
