@@ -1,16 +1,21 @@
 import React from 'react';
 import Header from '../Components/Header';
-import { Outlet } from 'react-router';
+import { Outlet, useNavigation } from 'react-router';
 import LatestNews from '../Components/LatestNews';
 import Navbar from '../Components/Navbar';
 import LeftAside from '../Components/HomeLayout/LeftAside';
 import RightAside from '../Components/HomeLayout/RightAside';
+import Loading from '../Pages/Loading';
 
 const HomeLayout = () => {
+    const {state} = useNavigation();
     return (
-        <div>
+        <div className='pb-5'>
             <header>
                 <Header></Header>
+                {
+                    import.meta.env.VITE_name
+                }
                 <section className='w-11/12 mx-auto my-5'>
                     <LatestNews></LatestNews>
                 </section>
@@ -18,14 +23,14 @@ const HomeLayout = () => {
                     <Navbar></Navbar>
                 </nav>
             </header>
-            <main className='w-11/12 mx-auto my-5 gap-5 grid grid-cols-12'>
-                <aside className='col-span-3'>
+            <main className='w-11/12 mx-auto my-5 gap-5 grid lg:grid-cols-12 grid-cols-1'>
+                <aside className='col-span-3 lg:sticky top-2 h-fit max-h-screen lg:overflow-y-auto'>
                     <LeftAside></LeftAside>
                 </aside>
                 <section className='main-nav col-span-6'>
-                    <Outlet></Outlet>
+                   {state == 'loading'? <Loading/> : <Outlet></Outlet>} 
                 </section>
-                <aside className='col-span-3'>
+                <aside className='col-span-3 lg:sticky top-2 h-fit max-h-screen lg:overflow-y-auto'>
                 <RightAside></RightAside></aside>            </main>
         </div>
     );
